@@ -1,0 +1,17 @@
+﻿@model work_Avr.Models.Api.GetFieldDataModel
+
+@section Head {
+    <script src="js/snaleTableUpdater.js"> </script>
+    <script>
+        let updater = new SnakeTableUpdater(500,"snakeTable");
+        updater.Start();
+    </script>
+} 
+<div>
+        <h1> ТУТ ИГРА</h1>
+        <br />
+        <div id="snakeTable">
+            @await Html.PartialAsync("/Views/PageParts/SnakeTable.cshtml", Model)
+        </div>
+
+</div>

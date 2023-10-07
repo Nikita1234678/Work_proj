@@ -1,0 +1,20 @@
+﻿@model work_Avr.Models.Api.GetFieldDataModel
+
+<table>
+    @for (int rowCounter = 0; rowCounter < Model.FieldHeigth; rowCounter++)
+    {
+        <tr>
+
+            @for (int cellCounter = 0; cellCounter < Model.FieldWidth; cellCounter++)
+            {
+                if(Model.FieldData[rowCounter][cellCounter]==0)
+                {
+                    <td width="50px" height="50px" style=" border: #458312; border-style: dashed; borderd-width: medium">  </td>
+                }else
+                {
+                <td width="50px" height="50px" style=" background-color: #123456; border: #458312; border-style: dashed; borderd-width: medium">  </td>
+                }
+            }
+        </tr>
+    }
+</table>
