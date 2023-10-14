@@ -1,4 +1,6 @@
-﻿namespace work_Avr.game
+﻿using System.Drawing;
+
+namespace work_Avr.game
 {
     public class Field
     {
@@ -6,7 +8,7 @@
         public const int _FIELD_HEIGTH = 10;
         public int[][] FieldData => _field;
         private int[][] _field;
-        private object _fieldlockObject=new object();
+        private readonly Snake _snake;
 
         private static int[][] InitField()
         {
@@ -18,21 +20,35 @@
             }
             return result;
         }
-
-        public Field()
+        private void AddSnakeDataToField()
         {
+            Point snakeHead = _snake.SnakeHead;
+            Point[] snakeBody = _snake.SnakeBody;
+            
+            _field[snakeHead.Y][snakeHead.X] = 3;
+            foreach(var snakeBodyPoint in snakeBody)
+            {
+                _field[snakeBodyPoint.Y][snakeBodyPoint.X] = 2;
+            }
+        }
+        public Field(Snake snake)
+        {
+            _snake = snake;
             _field = InitField();
+            
         }
         public void ChangeField()
         {
-            lock (_fieldlockObject)
-            {
-                _field = InitField();
-                var randomizer = new Random();
-                var rndRow = randomizer.Next() % 10;
-                var rndColumn = randomizer.Next() % 10;
-                _field[rndRow][rndColumn] = 1;
-            }
+
+            _field = InitField();
+            AddSnakeDataToField();
+
+            var randomizer = new Random();
+            var rndRow = randomizer.Next() % 10;
+            var rndColumn = randomizer.Next() % 10;
+
+            _field[rndRow][rndColumn] = 1;
+
         }
     }
 }

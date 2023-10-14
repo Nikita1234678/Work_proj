@@ -3,14 +3,38 @@
 @section Head {
     <script src="js/snaleTableUpdater.js"> </script>
     <script>
-        let updater = new SnakeTableUpdater(500,"snakeTable");
+        let updater = new SnakeTableUpdater(100,"snakeTable");
         updater.Start();
+    </script>
+
+    <script>
+        document.addEventListener("keydown",snakeTableKeyDown)
+        let lastKeyPressed = undefined;
+        function snakeTableKeyDown(args) {
+            if (lastKeyPressed != args.key) {
+                switch (args.key) {
+                    case "ArrowUp":
+                        $.ajax("Api/GoUp")
+                        break;
+                    case "ArrowDown":
+                        $.ajax("Api/GoDown")
+                        break;
+                    case "ArrowLeft":
+                        $.ajax("Api/GoLeft")
+                        break;
+                    case "ArrowRight":
+                        $.ajax("Api/GoRigth")
+                        break;
+                }
+            }
+            console.log(args);
+        }
     </script>
 } 
 <div>
         <h1> ТУТ ИГРА</h1>
         <br />
-        <div id="snakeTable">
+        <div id="snakeTable" class="snaketable" >
             @await Html.PartialAsync("/Views/PageParts/SnakeTable.cshtml", Model)
         </div>
 

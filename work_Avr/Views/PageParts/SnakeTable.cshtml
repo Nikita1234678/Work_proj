@@ -7,14 +7,22 @@
 
             @for (int cellCounter = 0; cellCounter < Model.FieldWidth; cellCounter++)
             {
-                if(Model.FieldData[rowCounter][cellCounter]==0)
-                {
-                    <td width="50px" height="50px" style=" border: #458312; border-style: dashed; borderd-width: medium">  </td>
-                }else
-                {
-                <td width="50px" height="50px" style=" background-color: #123456; border: #458312; border-style: dashed; borderd-width: medium">  </td>
-                }
-            }
+                @switch (Model.FieldData[rowCounter][cellCounter]) {                 
+
+                    case 1:
+                        <td style=" background-color: #123456;">  </td>
+                        break;
+                    case 2:
+                        <td style=" background-color: #528416;">  </td>
+                        break;
+                    case 3:
+                        <td style=" background-color: #289416;">  </td>
+                        break;
+                    default:
+                        <td>  </td>
+                        break;
+                } 
+        }
         </tr>
     }
 </table>
