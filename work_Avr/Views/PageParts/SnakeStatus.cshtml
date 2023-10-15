@@ -1,0 +1,32 @@
+﻿@model work_Avr.Models.Api.GetStatusDataModel
+@{
+    Layout = null;
+}
+
+<table>
+    <tr>
+        <td colspan=" 2"> <h3>Все что ты сделал в этой игре</h3></td>
+    </tr>
+    <tr>
+        <td> Ты убил в зародыше ящеров -</td>
+        <td>
+            @Model.SnakeSize;
+        </td>
+    </tr>
+    <tr>
+        <td> Очков заработано - </td>
+        <td>
+            @Model.SnakeScore;
+        </td>
+    </tr>
+    <tr>
+        <td> Столько времени ты провел за убийством -  </td>
+        <td>
+            @Model.GameTime;
+        </td>
+    </tr>
+    <tr>
+        <td colspan=" 2">=============================================  </td>
+        
+    </tr>
+</table>

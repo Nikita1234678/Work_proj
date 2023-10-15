@@ -9,7 +9,7 @@
     }
 
     #Updater(_this) {
-        $(`#${_this.#_rootNodeId}`).load("api/GetFiend");
+        $(`#`+_this.#_rootNodeId).load("Api/GetFiend");
     }
 
     Start() {

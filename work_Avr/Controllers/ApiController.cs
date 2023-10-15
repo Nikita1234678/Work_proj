@@ -17,10 +17,18 @@ namespace work_Avr.Controllers
             _game = game;
         }
 
+        public IActionResult GetStatus()
+        {
+            var dataModel = new GetStatusDataModel(_game);
+
+            return PartialView("/Views/PageParts/SnakeStatus.cshtml", dataModel);
+
+
+        }
+
         public IActionResult GetFiend()
         {
             
-              
                 var dataModel = new GetFieldDataModel(_game);
 
                 return PartialView("/Views/PageParts/SnakeTable.cshtml", dataModel);

@@ -1,10 +1,14 @@
-﻿@model work_Avr.Models.Api.GetFieldDataModel
+﻿@using work_Avr.Models.Api
+@model work_Avr.game.Game
 
 @section Head {
-    <script src="js/snaleTableUpdater.js"> </script>
+    <script src="js/SnakeTableUpdater.js"> </script>
+    <script src="js/SnakeStatusUpdater.js"> </script>
     <script>
-        let updater = new SnakeTableUpdater(100,"snakeTable");
-        updater.Start();
+        let table_updater = new SnakeTableUpdater(100, "snakeTable");
+        table_updater.Start();
+        let status_updater = new SnakeStatusUpdater(100, "snakeStatus");
+        status_updater.Start();
     </script>
 
     <script>
@@ -34,8 +38,20 @@
 <div>
         <h1> ТУТ ИГРА</h1>
         <br />
-        <div id="snakeTable" class="snaketable" >
-            @await Html.PartialAsync("/Views/PageParts/SnakeTable.cshtml", Model)
-        </div>
+        <table>
+            <tr>
+                <td>
+                    <div id="snakeTable" class="snaketable" >
+                            @await Html.PartialAsync("/Views/PageParts/SnakeTable.cshtml", new GetFieldDataModel(Model))
+                    </div>
+                </td>
+                <td>
+                     <div id="snakeStatus" class="snakeStatus">
+                            @await Html.PartialAsync("/Views/PageParts/SnakeStatus.cshtml", new GetStatusDataModel(Model))
+                     </div>
+                </td>
+            </tr>
+        </table>
+       
 
 </div>

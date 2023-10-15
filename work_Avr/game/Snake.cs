@@ -8,6 +8,11 @@ namespace work_Avr.game
         public Point[] SnakeBody => _snakeBody.Where(x=>x != SnakeHead).ToArray();
         public Point SnakeHead => _snakeBody.Last();
         public Point Speed { get;  set; } = Point.Empty;
+        public bool IsDead { get; private set; }= false;
+        public bool IsMoving { get; private set; } =false;
+
+        public int SnakeSize => _snakeBody.Count;
+
         private readonly Queue<Point> _snakeBody;
 
 
@@ -22,14 +27,36 @@ namespace work_Avr.game
             {
                 _snakeBody.Enqueue( new Point(snakeHead_X, snakeHead_Y) );
             }
+
+            IsDead = false;
         }
         public void Move()
         {
+            IsMoving = Speed != Point.Empty;
+
             Point head = SnakeHead;
             Point nextHead = new Point(head.X + Speed.X, head.Y + Speed.Y);
-                            
-            _snakeBody.Enqueue(nextHead);
+            IsDead = IsOutofField(nextHead);
+            if (IsDead) { return; }
             _snakeBody.Dequeue();
+            IsDead |= IsHitMyself(nextHead);
+            if (IsDead) { return; }
+
+            _snakeBody.Enqueue(nextHead); 
+            
         }
+
+        private bool IsHitMyself(Point nextHead)
+        {
+            return SnakeBody.Length>= BORN_SNAKE_SIZE -1 && _snakeBody.Contains(nextHead);
+        }
+
+        private bool IsOutofField(Point nextHead)
+        {
+            return nextHead.X >= Field._FIELD_WIDTH || nextHead.X < 0 ||
+                   nextHead.Y >= Field._FIELD_HEIGTH || nextHead.Y < 0;
+            
+        }
+
     }
 }
