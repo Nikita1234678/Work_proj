@@ -13,11 +13,11 @@ namespace work_Avr.Models.Api
         public bool IsSnakeMove { get; }
         public GetStatusDataModel(game.Game model)
         {
-            GameTime = new TimeSpan(model.Statistic.GameTime.Hours, model.Statistic.GameTime.Minutes,
-                       model.Statistic.GameTime.Seconds);
-            SnakeScore = model.Statistic.GameScore;
-            SnakeSize = model.Statistic.SnakeSize - 4;
-            IsSnakeDead = !model.Statistic.IsDead;
+            GameTime = new TimeSpan(model._statistic.GameTime.Hours, model._statistic.GameTime.Minutes,
+                                   model._statistic.GameTime.Seconds);
+            SnakeScore = model._statistic.GameScore;
+            SnakeSize = model._statistic.SnakeSize - 4;
+            IsSnakeDead = !model._statistic.IsDead;
             IsSnakeMove = model.Snake.IsMoving;
             
         }
