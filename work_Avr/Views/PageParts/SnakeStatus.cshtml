@@ -6,6 +6,19 @@
 <table>
     <tr>
         <td colspan=" 2"> <h3>Все что ты сделал в этой игре</h3></td>
+    
+    <tr>
+        <td> Ваш змей живой - -</td>
+        <td>
+            @Model.IsSnakeDead;
+        </td>
+    </tr>
+    <tr>
+        <td>Ваш змей движется - -</td>
+        <td>
+            @Model.IsSnakeMove;
+        </td>
+    </tr>
     </tr>
     <tr>
         <td> Ты убил в зародыше ящеров -</td>

@@ -15,10 +15,13 @@
             _timeListeners = timerListeners;
             _timer = new Timer(OnTimer);
             
+            
+
             if (timerListeners.Length > 0 )
             {
                 _timer.Change(_timeout, Timeout.InfiniteTimeSpan);
             }
+
             
         } 
         private void OnTimer(object? state)

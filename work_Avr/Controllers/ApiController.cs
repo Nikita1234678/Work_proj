@@ -25,6 +25,7 @@ namespace work_Avr.Controllers
 
 
         }
+        
 
         public IActionResult GetFiend()
         {
@@ -33,6 +34,10 @@ namespace work_Avr.Controllers
 
                 return PartialView("/Views/PageParts/SnakeTable.cshtml", dataModel);
             
+        }
+        public GetStatusDataModel SnakeStatusDataModel()
+        {
+            return new GetStatusDataModel(_game);
         }
 
         public void GoUp()

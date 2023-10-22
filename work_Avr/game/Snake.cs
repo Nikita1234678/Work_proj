@@ -10,6 +10,8 @@ namespace work_Avr.game
         public Point Speed { get;  set; } = Point.Empty;
         public bool IsDead { get; private set; }= false;
         public bool IsMoving { get; private set; } =false;
+        public bool IsGrownig { get; set; } = false;
+
 
         public int SnakeSize => _snakeBody.Count;
 
@@ -33,12 +35,19 @@ namespace work_Avr.game
         public void Move()
         {
             IsMoving = Speed != Point.Empty;
-
+            //if (IsDead) { return; }
             Point head = SnakeHead;
             Point nextHead = new Point(head.X + Speed.X, head.Y + Speed.Y);
             IsDead = IsOutofField(nextHead);
             if (IsDead) { return; }
-            _snakeBody.Dequeue();
+            if (!IsGrownig)
+            {
+                _snakeBody.Dequeue();
+            }
+            else
+            {
+                IsGrownig = false;
+            }
             IsDead |= IsHitMyself(nextHead);
             if (IsDead) { return; }
 
@@ -53,7 +62,7 @@ namespace work_Avr.game
 
         private bool IsOutofField(Point nextHead)
         {
-            return nextHead.X >= Field._FIELD_WIDTH || nextHead.X < 0 ||
+            return nextHead.X >= Field._FIELD_WIDTH ||  nextHead.X < 0 ||
                    nextHead.Y >= Field._FIELD_HEIGTH || nextHead.Y < 0;
             
         }

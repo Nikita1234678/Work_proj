@@ -9,7 +9,7 @@ namespace work_Avr.game
         public int[][] FieldData => _field;
         private int[][] _field;
         private readonly Snake _snake;
-
+        private readonly Eat _eat;
         private static int[][] InitField()
         {
             int[][] result = new int[_FIELD_HEIGTH][];
@@ -31,24 +31,24 @@ namespace work_Avr.game
                 _field[snakeBodyPoint.Y][snakeBodyPoint.X] = 2;
             }
         }
-        public Field(Snake snake)
+        public Field(Snake snake, Eat eat)
         {
             _snake = snake;
+            _eat = eat;
             _field = InitField();
             
         }
         public void ChangeField()
         {
-
             _field = InitField();
+            AddEatToField();
             AddSnakeDataToField();
+           
+        }
 
-            var randomizer = new Random();
-            var rndRow = randomizer.Next() % 10;
-            var rndColumn = randomizer.Next() % 10;
-
-            _field[rndRow][rndColumn] = 1;
-
+        private void AddEatToField()
+        {
+            _field[_eat.Position.Y][_eat.Position.X] = 1;
         }
     }
 }
